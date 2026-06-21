@@ -1,0 +1,82 @@
+/* Nice little styles for Calculator component */
+.calculator {
+  width: 320px;
+  margin: 32px auto;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff, #f3f7fb);
+  box-shadow: 0 6px 18px rgba(20, 40, 80, 0.12);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial;
+}
+
+.calculator .display {
+  height: 56px;
+  background: #0b1220;
+  color: #e6f0ff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.calculator .pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.calculator button {
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  background: #e9eef6;
+  color: #0b1220;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease;
+}
+
+.calculator button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(11, 18, 32, 0.08);
+}
+
+.calculator button:active {
+  transform: translateY(0);
+}
+
+.calculator button.equal {
+  grid-column: span 2;
+  background: linear-gradient(90deg, #4f46e5, #06b6d4);
+  color: white;
+  font-weight: 600;
+}
+
+.calculator button.clear {
+  background: #ff6b6b;
+  color: white;
+}
+
+@media (max-width: 420px) {
+  .calculator {
+    width: 92%;
+    padding: 12px;
+  }
+  .calculator .display {
+    font-size: 1rem;
+    height: 48px;
+  }
+}
