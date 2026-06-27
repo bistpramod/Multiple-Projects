@@ -1,62 +1,116 @@
-// FIXED: removed unused `React` import because it's not referenced (modern JSX transform)
-// import React, { useState } from "react";
 import { useState } from "react";
-// FIXED/ADDED: import styles for the calculator UI
 import "./Calculator.css";
 
 function Calculator() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState("0");
 
-  // FIXED: corrected arrow function syntax (was: "const handleClick = (value) = >{" )
-  // const handleClick = (value) = >{
-  //   setInput(input+value);
-  // }
-  const handleClick = (value: string) => {
-    setInput((prev) => prev + value);
+  const updateInput = (value: string) => {
+    setInput((prev) => {
+      if (prev === "0" || prev === "Error") {
+        return value;
+      }
+      return prev + value;
+    });
   };
 
   const clearInput = () => {
-    setInput("");
+    setInput("0");
   };
 
-  // FIXED: implemented calculateResult which previously was malformed
-  // const calculateResult = ()={
-  //   try {}
-  // }
+  const deleteLast = () => {
+    setInput((prev) => {
+      if (prev === "Error" || prev.length <= 1) {
+        return "0";
+      }
+      return prev.slice(0, -1);
+    });
+  };
+
+  const appendDecimal = () => {
+    if (input === "Error") {
+      setInput("0.");
+      return;
+    }
+
+    const parts = input.split(/([+\-*/])/);
+    const current = parts[parts.length - 1];
+
+    if (!current.includes(".")) {
+      setInput((prev) => prev + ".");
+    }
+  };
+
+  const handlePercent = () => {
+    try {
+      // eslint-disable-next-line no-eval
+      const value = eval(input) / 100;
+      setInput(String(value));
+    } catch {
+      setInput("Error");
+    }
+  };
+
   const calculateResult = () => {
     try {
-      // NOTE: using eval for simplicity — keep input sanitized in production
-      // Evaluate the expression and show the result
       // eslint-disable-next-line no-eval
       const result = eval(input);
       setInput(String(result));
-    } catch (e) {
+    } catch {
       setInput("Error");
     }
   };
 
   return (
     <div className="calculator">
-      <div className="display">{input}</div>
+      <div className="calculator__panel">
+        <div className="calculator__title">
+          <span>GBAdvanced</span>
+          <small>Smart calculator</small>
+        </div>
+        <div className="display" aria-label="Calculator display">
+          {input}
+        </div>
+      </div>
+
       <div className="pad">
-        <button onClick={() => handleClick("1")}>1</button>
-        <button onClick={() => handleClick("2")}>2</button>
-        <button onClick={() => handleClick("3")}>3</button>
-        <button onClick={() => handleClick("4")}>4</button>
-        <button onClick={() => handleClick("5")}>5</button>
-        <button onClick={() => handleClick("6")}>6</button>
-        <button onClick={() => handleClick("7")}>7</button>
-        <button onClick={() => handleClick("8")}>8</button>
-        <button onClick={() => handleClick("9")}>9</button>
-        <button onClick={() => handleClick("0")}>0</button>
-        <button onClick={() => handleClick("/")}>/</button>
-        <button onClick={() => handleClick("*")}>*</button>
-        <button onClick={() => handleClick("-")}>-</button>
-        <button onClick={() => handleClick("+")}>+</button>
-        <button className="clear" onClick={clearInput}>
-          C
+        <button className="function" onClick={clearInput}>
+          AC
         </button>
-        {/* FIXED: was calling undefined `calculate` handler; now calls `calculateResult` */}
+        <button className="function" onClick={deleteLast}>
+          DEL
+        </button>
+        <button className="function" onClick={handlePercent}>
+          %
+        </button>
+        <button className="operator" onClick={() => updateInput("/")}>
+          ÷
+        </button>
+
+        <button onClick={() => updateInput("7")}>7</button>
+        <button onClick={() => updateInput("8")}>8</button>
+        <button onClick={() => updateInput("9")}>9</button>
+        <button className="operator" onClick={() => updateInput("*")}>
+          ×
+        </button>
+
+        <button onClick={() => updateInput("4")}>4</button>
+        <button onClick={() => updateInput("5")}>5</button>
+        <button onClick={() => updateInput("6")}>6</button>
+        <button className="operator" onClick={() => updateInput("-")}>
+          −
+        </button>
+
+        <button onClick={() => updateInput("1")}>1</button>
+        <button onClick={() => updateInput("2")}>2</button>
+        <button onClick={() => updateInput("3")}>3</button>
+        <button className="operator" onClick={() => updateInput("+")}>
+          +
+        </button>
+
+        <button className="zero" onClick={() => updateInput("0")}>
+          0
+        </button>
+        <button onClick={appendDecimal}>.</button>
         <button className="equal" onClick={calculateResult}>
           =
         </button>

@@ -46,3 +46,4 @@ export const MovieProvider = ({ children }) => {
     </MovieContext.Provider>
   );
 };
+
