@@ -2,9 +2,21 @@ import { NavLink } from "react-router-dom";
 
 const navLinks = [
   { to: "/", label: "Home", end: true },
-  { to: "/about", label: "About" },
-  { to: "/projects", label: "Projects" },
-  { to: "/contact", label: "Contact" },
+
+  // { to: "/shop", label: "Shop" }, // these navlinks are for the new page which is not required
+  // { to: "/featured", label: "Featured" },
+
+  // { to: "/about", label: "About" },
+  // { to: "/contact", label: "Contact" },
+
+  // CHANGED: These are now section links on the same page.
+  { href: "#featured", label: "Featured" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
+
+  // Cart is still a separate page.
+  { to: "/cart", label: "Cart🛒" },
+  { href: "#footer", label: "Footer" },
 ];
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
@@ -25,12 +37,32 @@ const Navbar = () => {
         >
           Multiple Bits
         </NavLink>
+
         <ul className="flex items-center gap-1">
-          {navLinks.map(({ to, label, end }) => (
-            <li key={to}>
-              <NavLink to={to} end={end} className={linkClass}>
-                {label}
-              </NavLink>
+
+          {/* CHANGED: We now check each object in navLinks */}
+          {navLinks.map((link) => (
+            <li key={link.label}>
+
+              {/* CHANGED: If the object has 'to', it's a page route (Home, Cart) */}
+              {link.to ? (
+                <NavLink
+                  to={link.to}
+                  end={link.end}
+                  className={linkClass}
+                >
+                  {link.label}
+                </NavLink>
+              ) : (
+                /* CHANGED: If the object has 'href', it's a section on the same page */
+                <a
+                  href={link.href}
+                  className="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                >
+                  {link.label}
+                </a>
+              )}
+
             </li>
           ))}
         </ul>
