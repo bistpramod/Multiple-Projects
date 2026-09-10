@@ -1,7 +1,7 @@
 import "./css/App.css";
 import { Routes, Route } from 'react-router-dom'
 
-// import MovieCard from './components/MovieCard' // named export vs deafault export??
+
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import Navbar from './components/Navbar'

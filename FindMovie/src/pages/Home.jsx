@@ -10,7 +10,7 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Load popular movies on first render
+  // Load popular movies on first render
   useEffect(() => {
     const loadPopularMovies = async () => {
       try {
@@ -27,7 +27,7 @@ const Home = () => {
     loadPopularMovies();
   }, []);
 
-  // ✅ Handle search
+  //  Handle search
   const handleSearch = async (e) => {
     e.preventDefault();
 
