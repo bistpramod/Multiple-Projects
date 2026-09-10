@@ -1,10 +1,10 @@
-
 import React from "react";
-import { deflate } from "zlib";
+import { loginAction } from "../actions/auth";
 
 const LoginForm = () => {
   return (
-    <form className="w-full max-w-md space-y-6 rounded-2xl bg-white p-8 shadow-xl ring-1 gry-100">
+    <form className="w-full max-w-md space-y-6 rounded-2xl bg-white p-8 shadow-xl ring-1 ring-gray-100"
+    action={loginAction}>
       <div className="space-y-2">
         <label
           htmlFor="email"
