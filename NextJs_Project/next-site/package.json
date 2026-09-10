@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "server":"json-server --watch src/app/_data/db.json --port 3000 --host"
   },
   "dependencies": {
     "next": "16.3.4",
