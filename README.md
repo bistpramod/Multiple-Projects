@@ -1,1 +1,1 @@
-// making the logic easy and comfortable
+It consists of multiple projects that include several stacks
