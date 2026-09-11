@@ -1,9 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import LogoutButton from "./LogoutButton";
+import { getSession } from "../_lib/session";
+import { logoutAction } from "../actions/auth";
 
-const Navbar = () => {
-  const session = false;
+const Navbar = async () => {
+  const session = await getSession();
 
   return (
     <nav>
@@ -20,6 +22,7 @@ const Navbar = () => {
               </Link>
 
               <LogoutButton />
+             
             </>
           ) : (
             <>
