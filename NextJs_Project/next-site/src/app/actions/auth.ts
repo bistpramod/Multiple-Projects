@@ -13,6 +13,7 @@ export const loginAction = async (formData: FormData) => {
   const password = formData.get("password");
 
   let user: UserType | undefined;
+  let loginSucceeded = false;
 
   try {
     const response = await axios.get(
@@ -27,9 +28,13 @@ export const loginAction = async (formData: FormData) => {
     }
     // TODO: set user in cookies / session here
     await setSession({ name: user.name, email: user.email, id: user.id });
-    redirect("/dashboard");
+    loginSucceeded = true;
   } catch (error) {
     console.error("Login request failed:", error);
+  }
+
+  if (loginSucceeded) {
+    redirect("/dashboard");
   }
   redirect("/contact");
 };
