@@ -8,7 +8,7 @@ const LoginPage = () => {
       <h1 className="text-2xl font-bold mb-6">Login</h1>
       <LoginForm />
       <p>
-        Dont have an account?{" "}
+        Dont have an account?
         <Link href="/register">Register</Link>
       </p>
     </div>
