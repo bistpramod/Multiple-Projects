@@ -7,3 +7,6 @@ we are using app router so any thing we put in the src/app will be filebased rou
 // tehre are ways of adding css 
 // module.css can be used 
 server components should not have event handlers
+
+
+// checkout how cookies are stored and managed
