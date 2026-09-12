@@ -10,3 +10,5 @@ server components should not have event handlers
 
 
 // checkout how cookies are stored and managed
+
+// cloudinary for uploads are to be uploaded
